@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Safe&lt;T&gt; &mdash; Formal Runtime Monitoring</title>
+<style>
+  details { display: inline; }
+  summary { display: inline; list-style: none; }
+  summary::before { content: "▶ "; }
+  details[open] summary::before { content: "▼ "; }
+  :root{
+    --accent:#0b7a75; --accent-d:#075e5a; --ink:#1d2021; --rule:#d7d2c8;
+  }
+  body{ max-width:50em; }
+  .md .admonition.note {
+  background: none;
+  border-left-color: #0b7a75;
+  box-shadow: 0 0 8px #0b7a75 !important;}
+
+.md .admonition.note .admonition-title {
+  color: #0b7a75;
+}
+  .md a:link, .md a:visited{ color:var(--accent) !important; text-decoration:none; border-bottom:1px solid rgba(11,122,117,.35); }
+  .md a:hover{ color:var(--accent-d) !important; border-bottom-color:var(--accent-d); }
+  .hero{ text-align:center; margin:.2em 0 1.6em; }
+  .hero-title{
+    font-family: ui-monospace,'SF Mono','Menlo','Cascadia Code','Liberation Mono',monospace;
+    font-size:2.9em; font-weight:700; letter-spacing:-.01em; line-height:1.05;
+    margin:0; color:var(--ink);
+  }
+  .hero-title .tparam{ color:var(--accent); }
+  .hero-sub{ font-size:1.15em; color:#5b605e; margin:.55em auto 0; max-width:34em; }
+  .hero::after{ content:""; display:block; width:3.2em; height:2px; background:var(--accent); margin:1.1em auto 0; }
+  .md h1{ border-bottom:2px solid var(--accent) !important; padding-bottom:.18em; letter-spacing:-.005em; }
+  .md h2{ color:var(--accent-d) !important; }
+  .md div.diagram{ margin:1.6em auto !important; }
+  .venue{
+    display:inline-block; font-size:.62em; font-weight:700; letter-spacing:.07em;
+    text-transform:uppercase; color:var(--accent); border:1px solid var(--accent);
+    border-radius:4px; padding:.12em .5em; vertical-align:.18em; margin-left:.45em; white-space:nowrap;
+  }
+  .lede{ font-size:1.05em; }
+  .md code{ color:var(--accent-d); }
+  .hero-logo {
+  height: 1em;
+  width: auto;
+  vertical-align: middle;
+  transform: translateY(-0.1em); 
+}
+</style>
+</head>
+<body>
+<div class="hero">
+        <div class="hero-title"><img src="safet-logo.png" class="hero-logo" alt=""> Safe<span class="tparam">&amp;lt;T&amp;gt;</span></div>
+<div class="hero-sub">Automaton-theoretic Runtime Monitoring of Blackbox Systems</div>
+Dissertation research by [Karuna Grewal](https://www.cs.cornell.edu/~kgrewal/)
+
+Collaborators: [Brighten Godfrey](https://pbg.cs.illinois.edu/), [Justin Hsu](https://www.justinhsu.net/)
+</div>
+
+# Overview
+
+`Safe&lt;T&gt;` is an automaton-theoretic runtime-monitoring framework for 
+enforcing safety and security properties in systems without access to the source code. 
+Safety-critical systems in domains like healthcare, finance, and autonomous systems 
+are increasingly built from black-box components whose source code is unavailable for 
+inspection. To certify safe and secure inter-component interactions in such systems, 
+security and compliance teams must enforce policies over sequential and nested call/return 
+patterns in the inter-component interactions, along with the data values exchanged 
+between the components. Furthermore, the blackbox setting necessitates decoupling 
+the policy enforcement mechanism from the system implementation. To this end, we design 
+an expressive specification language for control and data-aware policies and an automaton-based 
+enforcement mechanism. Our technique is blackbox and non-invasive, i.e., it does not require 
+any access or changes to the system’s code. To realize our method, we have built a distributed 
+runtime monitor on top of an emerging network infrastructure layer that can control inter-component 
+communication during deployment.  
+
+_`Safe&lt;T&gt;` carries a pun in its name: read aloud, it is *safety*, while written as a generic type, 
+it suggests a family of monitors parametrized by T=automaton. Instantiations such as `SafeTree`, `SafeNom`, `SafePar` are monitors 
+specialized for different kind of properties, but at their core resides a safety automaton._
+
+!!! note
+      _`Safe&lt;T&gt;` is the project out of Karuna Grewal's dissertation research._ [(News)](https://siebelschool.illinois.edu/news/nsf-microservices)
+# Research Progress
+
+The research on `Safe&lt;T&gt;` sits at the intersection of automata theory, runtime monitoring, 
+and network, making distinct contributions to each. It has contributed: (a) new automata models 
+that are monitorable, (b) scalable distributed monitor implementation, (c) a repurposed network 
+layer for monitoring safety and security properties. These advancements have vast societal impact 
+as users require hard safety guarantees about their sensitive data. `Safe&lt;T&gt;` gives clients, 
+practitioners, and regulators a principled way to enforce rigorous safety and trust around software. 
+Users do not have to rewrite their software, easing my framework’s adoption and enabling widespread 
+use across industry. More details can be found in the following papers:
+
+**Expressive Policies for Microservice Networks**  <span class="venue">HotNets'23</span>
+<br>
+_Karuna Grewal, Brighten Godfrey, Justin Hsu_ 
+!!! note
+      Use automaton-based monitors in servicemesh to enforce multi-hop policies in microservices networks.
+[PDF](https://dl.acm.org/doi/10.1145/3626111.3628181) &middot; [BibTeX](#)
+
+**SafeTree: Expressive Tree Policies for Microservices** <span class="venue">OOPSLA'25</span><br>
+_Karuna Grewal, Brighten Godfrey, Justin Hsu_ 
+!!! note
+      Enforce properties over a microservice's tree structured execution by modeling the execution trace as a nested word that can be recognized using a visibly pushdown automaton.
+[PDF](https://dl.acm.org/doi/10.1145/3763127)&middot; [BibTeX](#)
+ 
+**SafeNom: Data-Aware Policies for Microservices ** <span class="venue">under submission</span>
+<br>
+_Karuna Grewal, Brighten Godfrey, Justin Hsu_
+
+ 
+**SafePar: Monitoring Asynchrony in Microservices** <span class="venue">in preparation</span>
+<br>
+_Karuna Grewal, Brighten Godfrey, Justin Hsu, Umang Mathur_
+
+ 
+**LLM-enabled Synthesis of Microservice Safety Properties** <span class="venue">in preparation</span><br>
+_Karuna Grewal, Brighten Godfrey, Justin Hsu_
+
+# Invited Talks
+
+**Automaton-Based Expressive Monitoring of Blackbox Systems** (_Karuna Grewal_)
+  
+  1. Cornell PL Discussion Group, Apr 2026
+  2. Purdue PL Seminar, Apr 2026
+  3. UPenn PLClub Discussion Group, May 2026
+
+**SafeTree: Expressive Tree Policies for Microservices** (_Karuna Grewal_)
+
+  1.  OOPSLA, Oct 2025
+  2.  Upstate Programming Languages Seminar, Aug 2025
+  3.  UIUC Formal Methods Seminar, Apr 2025
+  4.  New Jersey Programming Languages and Systems Seminar, Dec 2024
+
+**Expressive Policies for Microservice Networks** (_Karuna Grewal_)
+
+  1. UCSC Languages, Systems, and Data Seminar, Mar 2024
+  2.  HotNets, Nov 2023
+  3.  UIUC Service Layer Networking Workshop, Oct 2023
+
+
+# Code and artifacts
+ 
+A reference prototype of the monitoring architecture is released under the
+Apache&nbsp;2.0 license.
+ 
+[SafeTree Compiler](https://github.com/aakp10/SafeTree-Compiler) &middot; [Zenodo Artifact](https://zenodo.org/records/15751182)
+
+[SafeNom Compiler](https://github.com/aakp10/SafeNom-Compiler)
+ 
+# Contact
+ 
+[Karuna Grewal](#) &middot; [Google Scholar](https://scholar.google.com/citations?user=FzM5XHkAAAAJ&hl=en&oi=ao) &middot; [LinkedIn](https://www.linkedin.com/in/karuna-grewal/)
+ 
+ 
+
+<!-- Markdeep -->
+<style class="fallback">body{visibility:hidden;white-space:pre;font-family:monospace}</style>
+<script>window.markdeepOptions = { tocStyle: 'none', detectMath: true };</script>
+<script src="markdeep.min.js" charset="utf-8"></script>
+</body>
+</html>
