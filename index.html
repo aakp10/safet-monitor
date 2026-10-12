@@ -65,8 +65,8 @@ Collaborators: [Brighten Godfrey@UIUC](https://pbg.cs.illinois.edu/), [Justin Hs
 
 `Safe&lt;T&gt;` is an automaton-theoretic runtime-monitoring framework for 
 enforcing safety and security properties in systems without access to the source code. 
-Safety-critical systems in domains like healthcare, finance, and autonomous systems 
-are increasingly built from black-box components whose source code is unavailable for 
+High-stakes system like **AI agents, cloud applications, and cyber-physical systems** are 
+built from black-box components whose source code is unavailable for 
 inspection. To certify safe and secure inter-component interactions in such systems, 
 security and compliance teams must enforce policies over sequential and nested call/return 
 patterns in the inter-component interactions, along with the data values exchanged 
@@ -78,9 +78,15 @@ any access or changes to the system’s code. To realize our method, we have bui
 runtime monitor on top of an emerging network infrastructure layer that can control inter-component 
 communication during deployment.  
 
+Through SafeTree, SafeNom, and SafePar, we have demonstrated the practicality of `Safe&lt;T&gt;` in cloud applications. 
+We are now extending the framework to agentic AI in our SafeAge project and developing LLM-based techniques for synthesizing formal 
+safety specifications to ease the adoption of `Safe&lt;T&gt;`. 
+The software impact of this research has been recognized with Karuna's **2026 ACM SIGPLAN John Vlissides Award** 
+and a **LinkedIn Ph.D. Fellowship**. 
+
 <img src="safetdiag.png" alt="Safet system diagram">
 !!! note
-      _`Safe&lt;T&gt;` is the project out of Karuna Grewal's dissertation research._ [(News 1)](https://siebelschool.illinois.edu/news/nsf-microservices) [(News 2)](https://bowers.cornell.edu/news-stories/2026-linkedin-grant-recipients-drive-innovation-genai-llms) [News 3](https://news.cornell.edu/stories/2026/06/amazon-partnership-establishes-cornell-ai-security-initiative)
+      _`Safe&lt;T&gt;` is the project out of Karuna Grewal's dissertation research._ [(News 1)](https://siebelschool.illinois.edu/news/nsf-microservices) [(News 2)](https://bowers.cornell.edu/news-stories/2026-linkedin-grant-recipients-drive-innovation-genai-llms) [(News 3)](https://news.cornell.edu/stories/2026/06/amazon-partnership-establishes-cornell-ai-security-initiative)
 
 # Research Progress
 
@@ -147,9 +153,10 @@ _Sachin Ashok*, Karuna Grewal*, Talha Waheed, Gangmuk Lim, Gerard Matthew, Adity
 [PDF](./preprint/safet-kgrewal.pdf)&middot; [BibTeX](#)
 
 **LLM-enabled Synthesis of Microservice Safety Properties** <span class="venue">in preparation</span><br>
-_Karuna Grewal, Brighten Godfrey, Justin Hsu_
+_Karuna Grewal, Brighten Godfrey, Justin Hsu, and Umang Mathur_
 
-
+**SafeAge: Runtime `Safe&lt;T&gt;` Guardrails For Agentic AI Systems** <span class="venue">in preparation</span><br>
+_Karuna Grewal, Brighten Godfrey, Justin Hsu, and Umang Mathur_
 
 # Invited Talks
 
